@@ -2,18 +2,16 @@ import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Link2, Zap, ChevronDown, CheckCircle, XCircle,
-  Newspaper, MessageSquare, Quote, ClipboardCheck, Key
+  Newspaper, MessageSquare, Quote, ClipboardCheck
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { ContentType } from '../../types';
 import { EXAMPLE_PRESETS } from '../../lib/prompts/misinformationAnalysis';
-import { useAppStore } from '../../store/appStore';
 import { cn } from '../../utils/cn';
 
 interface AnalyzerInputProps {
   onAnalyze: (text: string, contentType: ContentType, url?: string) => void;
   isAnalyzing: boolean;
-  onOpenApiKey: () => void;
 }
 
 const contentTypeOptions: { value: ContentType; label: string; icon: React.ReactNode; description: string }[] = [
@@ -34,9 +32,7 @@ function isValidUrl(url: string): boolean {
   }
 }
 
-export function AnalyzerInput({ onAnalyze, isAnalyzing, onOpenApiKey }: AnalyzerInputProps) {
-  const { geminiApiKey } = useAppStore();
-  const activeApiKey = geminiApiKey || import.meta.env.VITE_GEMINI_API_KEY;
+export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
   const [activeTab, setActiveTab] = useState<'text' | 'url'>('text');
   const [text, setText] = useState('');
   const [url, setUrl] = useState('');
@@ -86,29 +82,13 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing, onOpenApiKey }: Analyzer
 
   const isTextReady = activeTab === 'text' && text.length >= MIN_CHARS && !isAnalyzing;
   const isUrlReady = activeTab === 'url' && urlValid === true && !isAnalyzing;
-  const canSubmit = (isTextReady || isUrlReady) && !!activeApiKey;
+  const canSubmit = isTextReady || isUrlReady;
 
   const charPercent = (text.length / MAX_CHARS) * 100;
 
   return (
     <div className="space-y-4">
-      {/* API Key Warning */}
-      {!activeApiKey && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-3 p-4 bg-amber-50 border border-amber-200 rounded-xl"
-        >
-          <Key className="w-5 h-5 text-amber-600 shrink-0" />
-          <div className="flex-1 text-sm text-amber-800">
-            <span className="font-semibold">Gemini API key required</span>
-            <span className="text-amber-700"> — Your key connects directly to Google Gemini from your browser.</span>
-          </div>
-          <Button size="sm" variant="outline" onClick={onOpenApiKey} className="shrink-0 border-amber-300 text-amber-700 hover:bg-amber-100">
-            Add Key
-          </Button>
-        </motion.div>
-      )}
+
 
       {/* Tabs */}
       <div className="flex bg-slate-100 rounded-xl p-1 gap-1">
@@ -315,14 +295,8 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing, onOpenApiKey }: Analyzer
           leftIcon={!isAnalyzing ? <Zap className="w-5 h-5" /> : undefined}
           className="text-base font-semibold"
         >
-          {!activeApiKey ? 'Add API Key to Analyze' : isAnalyzing ? 'Analyzing...' : 'Analyze Content'}
+          {isAnalyzing ? 'Analyzing...' : 'Analyze Content'}
         </Button>
-
-        {!activeApiKey && (
-          <button onClick={onOpenApiKey} className="w-full text-center text-sm text-blue-600 hover:text-blue-700 underline-offset-2 hover:underline">
-            Set your Gemini API key to get started
-          </button>
-        )}
 
         {activeTab === 'text' && text.length > 0 && text.length < MIN_CHARS && (
           <p className="text-xs text-amber-600 text-center">

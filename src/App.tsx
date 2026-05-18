@@ -2,24 +2,23 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Navbar } from './components/layout/Navbar';
-import { ApiKeyModal } from './components/ui/ApiKeyModal';
+
 import { DisclaimerBanner } from './components/ui/DisclaimerBanner';
 import { HomePage } from './pages/HomePage';
 import { AnalyzePage } from './pages/AnalyzePage';
 import { SourcesPage } from './pages/SourcesPage';
 
 export default function App() {
-  const [apiKeyOpen, setApiKeyOpen] = useState(false);
 
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-slate-50 font-sans" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-        <Navbar onOpenApiKey={() => setApiKeyOpen(true)} />
+        <Navbar />
 
         <main className="pb-20">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/analyze" element={<AnalyzePage onOpenApiKey={() => setApiKeyOpen(true)} />} />
+            <Route path="/analyze" element={<AnalyzePage />} />
             <Route path="/sources" element={<SourcesPage />} />
             {/* Fallback */}
             <Route path="*" element={
@@ -35,10 +34,7 @@ export default function App() {
 
         <DisclaimerBanner />
 
-        <ApiKeyModal
-          isOpen={apiKeyOpen}
-          onClose={() => setApiKeyOpen(false)}
-        />
+
 
         <Toaster
           position="top-right"

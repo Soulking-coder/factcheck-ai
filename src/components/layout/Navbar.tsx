@@ -3,12 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Menu, X, Key, BookOpen, Search } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { useAppStore } from '../../store/appStore';
 import { cn } from '../../utils/cn';
 
-interface NavbarProps {
-  onOpenApiKey: () => void;
-}
+interface NavbarProps {}
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -16,10 +13,9 @@ const navLinks = [
   { to: '/sources', label: 'Methodology', icon: BookOpen },
 ];
 
-export function Navbar({ onOpenApiKey }: NavbarProps) {
+export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const { geminiApiKey } = useAppStore();
 
   return (
     <nav className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
@@ -56,18 +52,7 @@ export function Navbar({ onOpenApiKey }: NavbarProps) {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={onOpenApiKey}
-              className={cn(
-                'flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-                geminiApiKey
-                  ? 'text-emerald-600 bg-emerald-50 hover:bg-emerald-100'
-                  : 'text-amber-600 bg-amber-50 hover:bg-amber-100'
-              )}
-            >
-              <Key className="w-4 h-4" />
-              {geminiApiKey ? 'API Key Set' : 'Set API Key'}
-            </button>
+
             <Link to="/analyze">
               <Button size="sm">
                 Analyze Now
@@ -112,16 +97,7 @@ export function Navbar({ onOpenApiKey }: NavbarProps) {
                 </Link>
               ))}
               <div className="pt-2 border-t border-slate-100 space-y-2">
-                <button
-                  onClick={() => { onOpenApiKey(); setMobileOpen(false); }}
-                  className={cn(
-                    'flex items-center gap-2 w-full px-3 py-2.5 rounded-xl text-sm font-medium transition-colors',
-                    geminiApiKey ? 'text-emerald-600 bg-emerald-50' : 'text-amber-600 bg-amber-50'
-                  )}
-                >
-                  <Key className="w-4 h-4" />
-                  {geminiApiKey ? '✓ API Key Configured' : '⚠ Set API Key'}
-                </button>
+
                 <Link to="/analyze" onClick={() => setMobileOpen(false)}>
                   <Button fullWidth size="sm">
                     Analyze Now

@@ -9,12 +9,8 @@ import { analyzeContent } from '../lib/gemini';
 import { useAppStore } from '../store/appStore';
 import { useAnalysisHistory } from '../hooks/useAnalysisHistory';
 
-interface AnalyzePageProps {
-  onOpenApiKey: () => void;
-}
-
-export function AnalyzePage({ onOpenApiKey }: AnalyzePageProps) {
-  const { geminiApiKey, googleApiKey, currentResult, setCurrentResult } = useAppStore();
+export function AnalyzePage() {
+  const { currentResult, setCurrentResult } = useAppStore();
   const { addAnalysis, removeAnalysis } = useAnalysisHistory();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,14 +47,6 @@ export function AnalyzePage({ onOpenApiKey }: AnalyzePageProps) {
   }, [currentResult]);
 
   const handleAnalyze = useCallback(async (text: string, contentType: ContentType) => {
-    const activeApiKey = geminiApiKey || import.meta.env.VITE_GEMINI_API_KEY;
-    const activeGoogleKey = googleApiKey || import.meta.env.VITE_GOOGLE_API_KEY;
-
-    if (!activeApiKey) {
-      setError('Please set your Gemini API key first.');
-      onOpenApiKey();
-      return;
-    }
 
     setError(null);
     setCurrentResult(null);
@@ -70,8 +58,6 @@ export function AnalyzePage({ onOpenApiKey }: AnalyzePageProps) {
       const result = await analyzeContent(
         text,
         contentType,
-        activeApiKey,
-        activeGoogleKey,
         abortControllerRef.current!.signal
       );
 
@@ -87,7 +73,7 @@ export function AnalyzePage({ onOpenApiKey }: AnalyzePageProps) {
     } finally {
       setIsAnalyzing(false);
     }
-  }, [geminiApiKey, googleApiKey, setCurrentResult, addAnalysis, onOpenApiKey]);
+  }, [setCurrentResult, addAnalysis]);
 
   const handleCancel = useCallback(() => {
     abortControllerRef.current?.abort();
@@ -160,7 +146,6 @@ export function AnalyzePage({ onOpenApiKey }: AnalyzePageProps) {
               <AnalyzerInput
                 onAnalyze={handleAnalyze}
                 isAnalyzing={isAnalyzing}
-                onOpenApiKey={onOpenApiKey}
               />
             </motion.div>
           )}
