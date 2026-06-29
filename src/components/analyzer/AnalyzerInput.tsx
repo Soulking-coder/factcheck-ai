@@ -87,18 +87,16 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
   const charPercent = (text.length / MAX_CHARS) * 100;
 
   return (
-    <div className="space-y-4">
-
-
+    <div className="space-y-6">
       {/* Tabs */}
-      <div className="flex bg-slate-100 rounded-xl p-1 gap-1">
+      <div className="flex bg-slate-900/60 p-1.5 rounded-xl border border-slate-700/50 gap-1.5 backdrop-blur-md shadow-inner">
         <button
           onClick={() => setActiveTab('text')}
           className={cn(
-            'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium transition-all',
+            'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all duration-300',
             activeTab === 'text'
-              ? 'bg-white text-slate-900 shadow-sm'
-              : 'text-slate-600 hover:text-slate-900'
+              ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.1)]'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent'
           )}
         >
           <FileText className="w-4 h-4" />
@@ -107,10 +105,10 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
         <button
           onClick={() => setActiveTab('url')}
           className={cn(
-            'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium transition-all',
+            'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all duration-300',
             activeTab === 'url'
-              ? 'bg-white text-slate-900 shadow-sm'
-              : 'text-slate-600 hover:text-slate-900'
+              ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.1)]'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent'
           )}
         >
           <Link2 className="w-4 h-4" />
@@ -126,7 +124,7 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
-            className="space-y-3"
+            className="space-y-4"
           >
             {/* Paste Feedback */}
             <AnimatePresence>
@@ -135,7 +133,7 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="flex items-center gap-2 text-sm text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2"
+                  className="flex items-center gap-2 text-sm text-emerald-300 bg-emerald-950/40 border border-emerald-500/30 rounded-lg px-4 py-2.5"
                 >
                   <ClipboardCheck className="w-4 h-4" />
                   Text pasted. Ready to analyze.
@@ -143,20 +141,21 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
               )}
             </AnimatePresence>
 
-            <div className="relative">
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-500 pointer-events-none" />
               <textarea
                 ref={textareaRef}
                 value={text}
                 onChange={handleTextChange}
                 onPaste={handlePaste}
                 placeholder="Paste the article, news excerpt, claim, or social media post you want to fact-check..."
-                className="w-full min-h-[220px] px-4 py-3.5 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y text-base leading-relaxed bg-white"
+                className="relative w-full min-h-[220px] px-5 py-4 rounded-xl border border-slate-700/80 bg-slate-900/80 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 resize-y text-base leading-relaxed backdrop-blur-xl shadow-inner transition-all"
                 style={{ fontSize: '16px' }}
               />
               {/* Char Counter */}
               <div className={cn(
-                'absolute bottom-3 right-3 text-xs font-mono transition-colors',
-                text.length >= MAX_CHARS ? 'text-red-500' : text.length > MAX_CHARS * 0.8 ? 'text-amber-500' : 'text-slate-400'
+                'absolute bottom-3 right-3 text-xs font-mono transition-colors glass px-2 py-1 rounded-md border-0',
+                text.length >= MAX_CHARS ? 'text-red-400' : text.length > MAX_CHARS * 0.8 ? 'text-amber-400' : 'text-slate-400'
               )}>
                 {text.length.toLocaleString()} / {MAX_CHARS.toLocaleString()}
               </div>
@@ -164,9 +163,9 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
 
             {/* Char progress bar */}
             {text.length > 0 && (
-              <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-1 bg-slate-800 rounded-full overflow-hidden shadow-inner">
                 <motion.div
-                  className={cn('h-full rounded-full transition-colors', charPercent > 90 ? 'bg-red-400' : charPercent > 70 ? 'bg-amber-400' : 'bg-blue-400')}
+                  className={cn('h-full rounded-full transition-colors', charPercent > 90 ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]' : charPercent > 70 ? 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]' : 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.6)]')}
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.min(charPercent, 100)}%` }}
                 />
@@ -174,22 +173,22 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
             )}
 
             {/* Content Type */}
-            <div>
-              <label className="block text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide">Content Type</label>
-              <div className="grid grid-cols-3 gap-2">
+            <div className="pt-2">
+              <label className="block text-xs font-bold text-slate-400 mb-3 uppercase tracking-widest">Select Content Type</label>
+              <div className="grid grid-cols-3 gap-3">
                 {contentTypeOptions.map(opt => (
                   <button
                     key={opt.value}
                     onClick={() => setContentType(opt.value)}
                     className={cn(
-                      'flex flex-col items-center gap-1.5 p-3 rounded-xl border text-center transition-all',
+                      'flex flex-col items-center gap-2 p-3.5 rounded-xl border text-center transition-all duration-300',
                       contentType === opt.value
-                        ? 'border-blue-500 bg-blue-50 text-blue-700'
-                        : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+                        ? 'border-cyan-500/50 bg-cyan-900/20 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.15)] scale-[1.02]'
+                        : 'border-slate-800 bg-slate-900/50 text-slate-400 hover:border-slate-600 hover:bg-slate-800/80 hover:text-slate-200'
                     )}
                   >
                     {opt.icon}
-                    <span className="text-xs font-medium">{opt.label}</span>
+                    <span className="text-xs font-semibold tracking-wide">{opt.label}</span>
                   </button>
                 ))}
               </div>
@@ -201,41 +200,43 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -10 }}
-            className="space-y-3"
+            className="space-y-4"
           >
-            <div className="relative">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                <Link2 className="w-4 h-4" />
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-500 pointer-events-none" />
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 z-10">
+                <Link2 className="w-5 h-5" />
               </div>
               <input
                 type="url"
                 value={url}
                 onChange={handleUrlChange}
                 placeholder="https://example.com/article..."
-                className="w-full pl-10 pr-10 py-3.5 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base bg-white"
+                className="relative w-full pl-12 pr-12 py-4 rounded-xl border border-slate-700/80 bg-slate-900/80 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 text-base backdrop-blur-xl shadow-inner transition-all"
                 style={{ fontSize: '16px' }}
               />
               {urlValid !== null && (
-                <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 z-10">
                   {urlValid ? (
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
+                    <CheckCircle className="w-5 h-5 text-emerald-400 drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]" />
                   ) : (
-                    <XCircle className="w-4 h-4 text-red-500" />
+                    <XCircle className="w-5 h-5 text-red-400 drop-shadow-[0_0_5px_rgba(248,113,113,0.5)]" />
                   )}
                 </div>
               )}
             </div>
 
             {urlValid === false && (
-              <p className="text-sm text-red-600 flex items-center gap-1.5">
-                <XCircle className="w-3.5 h-3.5" />
+              <p className="text-sm text-red-400 flex items-center gap-2 font-medium bg-red-950/30 p-2.5 rounded-lg border border-red-500/20">
+                <XCircle className="w-4 h-4" />
                 Please enter a valid URL starting with https://
               </p>
             )}
 
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-              <p className="text-sm text-slate-600">
-                <span className="font-medium">Note:</span> For URL analysis, paste the article text directly into the text tab for best results. 
+            <div className="p-5 glass rounded-xl border border-slate-800">
+              <p className="text-sm text-slate-300 leading-relaxed">
+                <span className="font-semibold text-cyan-400 mr-2">Note:</span> 
+                For URL analysis, paste the article text directly into the text tab for best results. 
                 URL analysis requires server-side content extraction which is not available in this demo version.
               </p>
             </div>
@@ -244,36 +245,37 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
       </AnimatePresence>
 
       {/* Examples */}
-      <div className="relative">
+      <div className="relative pt-2">
         <button
           onClick={() => setShowExamples(!showExamples)}
-          className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 transition-colors"
+          className="flex items-center gap-2 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.3)]"
         >
-          <Zap className="w-3.5 h-3.5" />
+          <Zap className="w-4 h-4" />
           Load Example
-          <ChevronDown className={cn('w-3.5 h-3.5 transition-transform', showExamples && 'rotate-180')} />
+          <ChevronDown className={cn('w-4 h-4 transition-transform duration-300', showExamples && 'rotate-180')} />
         </button>
 
         <AnimatePresence>
           {showExamples && (
             <motion.div
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              className="absolute top-full left-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-10 min-w-[280px]"
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 mt-3 glass-card border border-slate-700/50 rounded-xl shadow-2xl overflow-hidden z-20 min-w-[320px]"
             >
               {EXAMPLE_PRESETS.map((preset, i) => (
                 <button
                   key={i}
                   onClick={() => loadExample(i)}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-slate-50 transition-colors border-b border-slate-100 last:border-0"
+                  className="w-full flex items-center gap-4 px-5 py-3.5 text-left hover:bg-slate-800/80 transition-colors border-b border-slate-800/50 last:border-0 group"
                 >
-                  <span className="text-base">{preset.label.split(' ')[0]}</span>
-                  <div>
-                    <div className="text-sm font-medium text-slate-800">
+                  <span className="text-sm font-bold text-cyan-400 group-hover:text-cyan-300">{preset.label.split(' ')[0]}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-semibold text-slate-200 truncate">
                       {preset.label.split(' ').slice(1).join(' ')}
                     </div>
-                    <div className="text-xs text-slate-500 mt-0.5">
+                    <div className="text-xs text-slate-500 mt-1 truncate">
                       {preset.text.slice(0, 60)}...
                     </div>
                   </div>
@@ -285,7 +287,7 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
       </div>
 
       {/* Analyze Button */}
-      <div className="space-y-2">
+      <div className="space-y-4 pt-4">
         <Button
           fullWidth
           size="lg"
@@ -293,21 +295,22 @@ export function AnalyzerInput({ onAnalyze, isAnalyzing }: AnalyzerInputProps) {
           disabled={!canSubmit}
           loading={isAnalyzing}
           leftIcon={!isAnalyzing ? <Zap className="w-5 h-5" /> : undefined}
-          className="text-base font-semibold"
+          className="text-lg font-bold py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 border-0 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all duration-300 text-white disabled:opacity-50 disabled:shadow-none"
         >
           {isAnalyzing ? 'Analyzing...' : 'Analyze Content'}
         </Button>
 
         {activeTab === 'text' && text.length > 0 && text.length < MIN_CHARS && (
-          <p className="text-xs text-amber-600 text-center">
+          <p className="text-xs text-amber-400 text-center font-medium bg-amber-950/20 py-1.5 rounded-md border border-amber-500/10">
             Please enter at least {MIN_CHARS} characters ({MIN_CHARS - text.length} more needed)
           </p>
         )}
 
-        <p className="text-xs text-slate-400 text-center leading-relaxed">
+        <p className="text-xs text-slate-500 text-center leading-relaxed">
           ⚠️ AI analysis may not be 100% accurate. Always verify with human fact-checkers.
         </p>
       </div>
     </div>
   );
 }
+

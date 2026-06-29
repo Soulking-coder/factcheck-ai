@@ -23,11 +23,11 @@ export function Button({
   ...props
 }: ButtonProps) {
   const variants = {
-    primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow-md active:scale-[0.98]',
+    primary: 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] active:scale-[0.98]',
     secondary: 'bg-slate-800 hover:bg-slate-900 text-white shadow-sm active:scale-[0.98]',
-    outline: 'bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-sm active:scale-[0.98]',
-    ghost: 'bg-transparent hover:bg-slate-100 text-slate-700 active:scale-[0.98]',
-    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm active:scale-[0.98]',
+    outline: 'bg-transparent hover:bg-slate-800/50 text-slate-300 border border-slate-700 hover:border-slate-500 active:scale-[0.98]',
+    ghost: 'bg-transparent hover:bg-slate-800/50 text-slate-400 hover:text-slate-200 active:scale-[0.98]',
+    danger: 'bg-red-600/80 hover:bg-red-600 text-white shadow-sm active:scale-[0.98]',
   };
 
   const sizes = {
@@ -39,7 +39,7 @@ export function Button({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
+        'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:ring-offset-0 focus:ring-offset-slate-950',
         variants[variant],
         sizes[size],
         (disabled || loading) && 'opacity-60 cursor-not-allowed pointer-events-none',

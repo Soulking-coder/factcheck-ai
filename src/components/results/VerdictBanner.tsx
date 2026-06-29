@@ -20,34 +20,34 @@ const verdictConfig: Record<Verdict, {
 }> = {
   'Likely True': {
     icon: CheckCircle,
-    bgGradient: 'from-emerald-50 to-green-100',
-    textColor: 'text-emerald-800',
+    bgGradient: 'from-emerald-950/40 to-emerald-900/30',
+    textColor: 'text-emerald-300',
     badgeVariant: 'success',
-    borderColor: 'border-emerald-200',
+    borderColor: 'border-emerald-500/30',
     explanation: 'The main claims in this content appear to be factually accurate based on available evidence. While no AI can be 100% certain, the content aligns with verifiable facts and credible sources. Still, we recommend checking the recommended sources to confirm.',
   },
   'Mixed': {
     icon: AlertTriangle,
-    bgGradient: 'from-amber-50 to-yellow-100',
-    textColor: 'text-amber-800',
+    bgGradient: 'from-amber-950/40 to-amber-900/30',
+    textColor: 'text-amber-300',
     badgeVariant: 'warning',
-    borderColor: 'border-amber-200',
+    borderColor: 'border-amber-500/30',
     explanation: 'This content contains a mix of accurate information and misleading or unverified claims. Some statements may be true while others are exaggerated, taken out of context, or unsubstantiated. Read critically and verify specific claims independently.',
   },
   'Likely False': {
     icon: XCircle,
-    bgGradient: 'from-red-50 to-rose-100',
-    textColor: 'text-red-800',
+    bgGradient: 'from-red-950/40 to-red-900/30',
+    textColor: 'text-red-300',
     badgeVariant: 'danger',
-    borderColor: 'border-red-200',
+    borderColor: 'border-red-500/30',
     explanation: 'The main claims in this content appear to be false, misleading, or not supported by credible evidence. This content may be misinformation, propaganda, or deliberately manipulative. Do not share without thorough verification from independent sources.',
   },
   'Unverifiable': {
     icon: HelpCircle,
-    bgGradient: 'from-slate-50 to-gray-100',
-    textColor: 'text-slate-700',
+    bgGradient: 'from-slate-900/60 to-slate-800/40',
+    textColor: 'text-slate-300',
     badgeVariant: 'gray',
-    borderColor: 'border-slate-200',
+    borderColor: 'border-slate-700',
     explanation: 'The claims in this content cannot be independently verified with available information. This may be because the content makes predictions, discusses unconfirmed events, or relies on information that cannot be cross-referenced. Treat with appropriate skepticism.',
   },
 };
@@ -79,18 +79,18 @@ export function VerdictBanner({ verdict, credibilityScore, summary }: VerdictBan
       <div className="relative">
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex items-center gap-3">
-            <div className={`p-2.5 rounded-xl bg-white/60 ${config.textColor}`}>
+            <div className={`p-2.5 rounded-xl bg-slate-900/60 ${config.textColor}`}>
               <Icon className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-0.5">Verdict</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-0.5">Verdict</p>
               <h2 className={`text-2xl font-bold ${config.textColor}`}>{verdict}</h2>
             </div>
           </div>
 
           <div className="text-right shrink-0">
-            <div className="text-3xl font-bold text-slate-900">{credibilityScore}</div>
-            <div className="text-xs text-slate-500">/ 100</div>
+            <div className="text-3xl font-bold text-white">{credibilityScore}</div>
+            <div className="text-xs text-slate-400">/ 100</div>
             <Badge variant={scoreBadge.variant} size="sm" className="mt-1">
               {scoreBadge.label}
             </Badge>
@@ -114,7 +114,7 @@ export function VerdictBanner({ verdict, credibilityScore, summary }: VerdictBan
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className={`mt-3 p-4 bg-white/50 rounded-xl text-sm ${config.textColor} leading-relaxed`}
+            className={`mt-3 p-4 bg-slate-900/50 rounded-xl text-sm ${config.textColor} leading-relaxed`}
           >
             {config.explanation}
           </motion.div>

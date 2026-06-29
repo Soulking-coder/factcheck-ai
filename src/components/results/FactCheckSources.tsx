@@ -45,11 +45,11 @@ export function FactCheckSources({ sources }: FactCheckSourcesProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6"
+      className="glass-card rounded-2xl p-6"
     >
       <div className="flex items-center gap-2 mb-2">
-        <Shield className="w-5 h-5 text-blue-500" />
-        <h3 className="font-semibold text-slate-800">Verify With These Sources</h3>
+        <Shield className="w-5 h-5 text-cyan-400" />
+        <h3 className="font-semibold text-slate-200">Verify With These Sources</h3>
       </div>
       <p className="text-sm text-slate-500 mb-5">
         We recommend cross-referencing at least 2 independent sources.
@@ -64,25 +64,25 @@ export function FactCheckSources({ sources }: FactCheckSourcesProps) {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.08 + 0.3 }}
-              className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all group"
+              className="flex items-start gap-4 p-4 rounded-xl border border-slate-800 hover:border-slate-700 hover:shadow-[0_0_15px_rgba(6,182,212,0.1)] transition-all group"
             >
               <SourceLogo name={source.name} />
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <span className="font-semibold text-slate-800 text-sm">{source.name}</span>
+                  <span className="font-semibold text-slate-200 text-sm group-hover:text-cyan-400 transition-colors">{source.name}</span>
                   <Badge variant={reliability.variant} size="sm">
                     {reliability.icon} {reliability.label}
                   </Badge>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed">{source.reason}</p>
+                <p className="text-xs text-slate-400 leading-relaxed">{source.reason}</p>
               </div>
 
               <a
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors group-hover:shadow-sm"
+                className="shrink-0 flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 px-3 py-1.5 rounded-lg bg-cyan-950/40 hover:bg-cyan-950/60 border border-cyan-500/20 transition-colors group-hover:shadow-sm"
               >
                 Check
                 <ExternalLink className="w-3 h-3" />
@@ -92,7 +92,7 @@ export function FactCheckSources({ sources }: FactCheckSourcesProps) {
         })}
       </div>
 
-      <div className="mt-5 flex items-start gap-2 p-3 bg-slate-50 rounded-xl">
+      <div className="mt-5 flex items-start gap-2 p-3 bg-slate-900/50 border border-slate-800 rounded-xl">
         <Info className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
         <p className="text-xs text-slate-400 leading-relaxed">
           These are independent organizations. FactCheck AI is not affiliated with any of them. 

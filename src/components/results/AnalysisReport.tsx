@@ -96,7 +96,7 @@ export function AnalysisReport({ result, onAnalyzeAnother, onDelete }: AnalysisR
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35 }}
-        className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5"
+        className="glass-card rounded-2xl p-5"
       >
         <div className="flex flex-wrap gap-3">
           <Button
@@ -131,7 +131,7 @@ export function AnalysisReport({ result, onAnalyzeAnother, onDelete }: AnalysisR
             <div className="ml-auto">
               {showDeleteConfirm ? (
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-red-600">Are you sure?</span>
+                  <span className="text-xs text-red-400">Are you sure?</span>
                   <Button size="sm" variant="danger" onClick={() => { onDelete(); setShowDeleteConfirm(false); }}>
                     Yes, Delete
                   </Button>
@@ -142,8 +142,8 @@ export function AnalysisReport({ result, onAnalyzeAnother, onDelete }: AnalysisR
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowDeleteConfirm(true)}
-                  leftIcon={<Trash2 className="w-4 h-4 text-red-500" />}
-                  className="text-red-500 hover:bg-red-50"
+                  leftIcon={<Trash2 className="w-4 h-4 text-red-400" />}
+                  className="text-red-400 hover:bg-red-950/40"
                 >
                   Delete
                 </Button>
@@ -170,7 +170,7 @@ export function AnalysisReport({ result, onAnalyzeAnother, onDelete }: AnalysisR
         </span>
         <span>ID: {result.id.slice(-8)}</span>
         {result.tokensUsed && <span>{result.tokensUsed.toLocaleString()} tokens</span>}
-        <a href="#" className="hover:text-slate-600 underline underline-offset-2">
+        <a href="#" className="hover:text-slate-300 underline underline-offset-2">
           Report an issue
         </a>
       </motion.div>

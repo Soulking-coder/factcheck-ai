@@ -13,7 +13,7 @@ export function DisclaimerBanner() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 20 }}
-          className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm text-white shadow-2xl border-t border-slate-700"
+          className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-sm text-white shadow-2xl border-t border-slate-800 glass"
         >
           <div className="max-w-6xl mx-auto px-4 py-4 flex items-start gap-4">
             <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />

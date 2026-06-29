@@ -12,7 +12,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-slate-50 font-sans" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <div className="min-h-screen bg-slate-950 font-sans" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
         <Navbar />
 
         <main className="pb-20">
@@ -24,9 +24,9 @@ export default function App() {
             <Route path="*" element={
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
                 <div className="text-6xl mb-4">🔍</div>
-                <h1 className="text-2xl font-bold text-slate-900 mb-2">Page Not Found</h1>
-                <p className="text-slate-500 mb-6">The page you're looking for doesn't exist.</p>
-                <a href="/" className="text-blue-600 hover:text-blue-700 font-medium">← Go Home</a>
+                <h1 className="text-2xl font-bold text-white mb-2">Page Not Found</h1>
+                <p className="text-slate-400 mb-6">The page you're looking for doesn't exist.</p>
+                <a href="/" className="text-cyan-400 hover:text-cyan-300 font-medium">← Go Home</a>
               </div>
             } />
           </Routes>

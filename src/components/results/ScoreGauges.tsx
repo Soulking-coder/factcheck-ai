@@ -55,7 +55,7 @@ function CircularGauge({ value, max, color, label, sublabel, description, displa
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay }}
-      className="flex flex-col items-center p-5 bg-white rounded-2xl border border-slate-100 shadow-sm"
+      className="flex flex-col items-center p-5 glass-card rounded-2xl"
     >
       <div className="relative mb-3">
         <svg width="130" height="130" viewBox="0 0 130 130">
@@ -65,7 +65,7 @@ function CircularGauge({ value, max, color, label, sublabel, description, displa
             cy="65"
             r={radius}
             fill="none"
-            stroke="#f1f5f9"
+            stroke="#1e293b"
             strokeWidth="12"
           />
           {/* Animated progress */}
@@ -99,7 +99,7 @@ function CircularGauge({ value, max, color, label, sublabel, description, displa
           )}
         </div>
       </div>
-      <h3 className="font-semibold text-slate-800 text-center text-sm">{label}</h3>
+      <h3 className="font-semibold text-slate-200 text-center text-sm">{label}</h3>
       {sublabel && (
         <p className="text-xs font-medium mt-0.5" style={{ color }}>{sublabel}</p>
       )}

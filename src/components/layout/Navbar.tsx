@@ -18,17 +18,17 @@ export function Navbar() {
   const location = useLocation();
 
   return (
-    <nav className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+    <nav className="sticky top-0 z-30 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/60 shadow-sm">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+            <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm shadow-cyan-500/20 group-hover:shadow-md transition-shadow">
               <Shield className="w-4.5 h-4.5 text-white" style={{ width: '18px', height: '18px' }} />
             </div>
             <div>
-              <span className="font-bold text-slate-900 text-sm leading-none block">FactCheck AI</span>
-              <span className="text-xs text-slate-400 leading-none">Misinformation Detector</span>
+              <span className="font-bold text-white text-sm leading-none block">FactCheck AI</span>
+              <span className="text-xs text-slate-500 leading-none">Misinformation Detector</span>
             </div>
           </Link>
 
@@ -41,8 +41,8 @@ export function Navbar() {
                 className={cn(
                   'flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors relative',
                   location.pathname === link.to
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    ? 'text-cyan-400 bg-cyan-500/10'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                 )}
               >
                 {link.label}
@@ -63,7 +63,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors"
+            className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -77,7 +77,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-slate-100 bg-white overflow-hidden"
+            className="md:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur-md overflow-hidden"
           >
             <div className="px-4 py-3 space-y-1">
               {navLinks.map(link => (
@@ -88,15 +88,15 @@ export function Navbar() {
                   className={cn(
                     'flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors w-full',
                     location.pathname === link.to
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-slate-700 hover:bg-slate-50'
+                      ? 'text-cyan-400 bg-cyan-500/10'
+                      : 'text-slate-300 hover:bg-slate-800/50'
                   )}
                 >
                   {link.icon && <link.icon className="w-4 h-4" />}
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-2 border-t border-slate-100 space-y-2">
+              <div className="pt-2 border-t border-slate-800 space-y-2">
 
                 <Link to="/analyze" onClick={() => setMobileOpen(false)}>
                   <Button fullWidth size="sm">

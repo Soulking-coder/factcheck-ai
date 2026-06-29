@@ -32,12 +32,12 @@ export function BiasIndicator({ biasScore: rawScore }: BiasIndicatorProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.2 }}
-      className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6"
+      className="glass-card rounded-2xl p-6"
     >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold text-slate-800">Political Bias Indicator</h3>
+        <h3 className="font-semibold text-slate-200">Political Bias Indicator</h3>
         <div className="text-right">
-          <div className="text-sm font-bold text-slate-700">{label}</div>
+          <div className="text-sm font-bold text-slate-200">{label}</div>
           <div className="text-xs text-slate-400">Score: {biasScore > 0 ? '+' : ''}{biasScore}</div>
         </div>
       </div>
@@ -63,7 +63,7 @@ export function BiasIndicator({ biasScore: rawScore }: BiasIndicatorProps) {
             initial={{ scaleY: 0 }}
             animate={{ scaleY: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="w-1 h-4 bg-white rounded-full border-2 border-slate-700 shadow-lg"
+            className="w-1 h-4 bg-white rounded-full border-2 border-white shadow-lg"
           />
         </div>
       </div>
@@ -88,10 +88,10 @@ export function BiasIndicator({ biasScore: rawScore }: BiasIndicatorProps) {
       </div>
 
       {/* Current bias */}
-      <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl">
+      <div className="flex items-start gap-3 p-3 bg-slate-900/50 border border-slate-800 rounded-xl">
         <div className="flex-1">
-          <p className="text-sm font-medium text-slate-800">{label}</p>
-          <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+          <p className="text-sm font-medium text-slate-200">{label}</p>
+          <p className="text-xs text-slate-400 mt-0.5">{description}</p>
         </div>
       </div>
 
